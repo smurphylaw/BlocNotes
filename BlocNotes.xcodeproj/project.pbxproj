@@ -10,11 +10,16 @@
 		0D876EAE1B1A76D2008CF122 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D876EAD1B1A76D2008CF122 /* main.m */; };
 		0D876EB11B1A76D2008CF122 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D876EB01B1A76D2008CF122 /* AppDelegate.m */; };
 		0D876EB41B1A76D2008CF122 /* BlocNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0D876EB21B1A76D2008CF122 /* BlocNotes.xcdatamodeld */; };
-		0D876EB71B1A76D2008CF122 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D876EB61B1A76D2008CF122 /* ViewController.m */; };
 		0D876EBA1B1A76D2008CF122 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D876EB81B1A76D2008CF122 /* Main.storyboard */; };
 		0D876EBC1B1A76D2008CF122 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D876EBB1B1A76D2008CF122 /* Images.xcassets */; };
 		0D876EBF1B1A76D2008CF122 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D876EBD1B1A76D2008CF122 /* LaunchScreen.xib */; };
 		0D876ECB1B1A76D2008CF122 /* BlocNotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D876ECA1B1A76D2008CF122 /* BlocNotesTests.m */; };
+		0D876ED61B1A77BE008CF122 /* NotesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D876ED51B1A77BE008CF122 /* NotesTableViewController.m */; };
+		0D876ED91B1A7806008CF122 /* NotesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D876ED81B1A7806008CF122 /* NotesTableViewCell.m */; };
+		0D876EDF1B1A7852008CF122 /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D876EDE1B1A7852008CF122 /* DataSource.m */; };
+		0D876EE31B1A7ED1008CF122 /* DetailNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D876EE21B1A7ED1008CF122 /* DetailNoteViewController.m */; };
+		0D876EE61B1AB784008CF122 /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D876EE51B1AB784008CF122 /* CoreDataStack.m */; };
+		0D876EEC1B1E9A91008CF122 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D876EEB1B1E9A91008CF122 /* Note.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,14 +39,24 @@
 		0D876EAF1B1A76D2008CF122 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0D876EB01B1A76D2008CF122 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0D876EB31B1A76D2008CF122 /* BlocNotes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BlocNotes.xcdatamodel; sourceTree = "<group>"; };
-		0D876EB51B1A76D2008CF122 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0D876EB61B1A76D2008CF122 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0D876EB91B1A76D2008CF122 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0D876EBB1B1A76D2008CF122 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0D876EBE1B1A76D2008CF122 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0D876EC41B1A76D2008CF122 /* BlocNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D876EC91B1A76D2008CF122 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D876ECA1B1A76D2008CF122 /* BlocNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlocNotesTests.m; sourceTree = "<group>"; };
+		0D876ED41B1A77BE008CF122 /* NotesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesTableViewController.h; sourceTree = "<group>"; };
+		0D876ED51B1A77BE008CF122 /* NotesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesTableViewController.m; sourceTree = "<group>"; };
+		0D876ED71B1A7806008CF122 /* NotesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesTableViewCell.h; sourceTree = "<group>"; };
+		0D876ED81B1A7806008CF122 /* NotesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesTableViewCell.m; sourceTree = "<group>"; };
+		0D876EDD1B1A7852008CF122 /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSource.h; sourceTree = "<group>"; };
+		0D876EDE1B1A7852008CF122 /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSource.m; sourceTree = "<group>"; };
+		0D876EE11B1A7ED1008CF122 /* DetailNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailNoteViewController.h; sourceTree = "<group>"; };
+		0D876EE21B1A7ED1008CF122 /* DetailNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailNoteViewController.m; sourceTree = "<group>"; };
+		0D876EE41B1AB784008CF122 /* CoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStack.h; sourceTree = "<group>"; };
+		0D876EE51B1AB784008CF122 /* CoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStack.m; sourceTree = "<group>"; };
+		0D876EEA1B1E9A91008CF122 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		0D876EEB1B1E9A91008CF122 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,10 +98,17 @@
 		0D876EAA1B1A76D2008CF122 /* BlocNotes */ = {
 			isa = PBXGroup;
 			children = (
+				0D876EE01B1A7857008CF122 /* Model */,
 				0D876EAF1B1A76D2008CF122 /* AppDelegate.h */,
 				0D876EB01B1A76D2008CF122 /* AppDelegate.m */,
-				0D876EB51B1A76D2008CF122 /* ViewController.h */,
-				0D876EB61B1A76D2008CF122 /* ViewController.m */,
+				0D876EE11B1A7ED1008CF122 /* DetailNoteViewController.h */,
+				0D876EE21B1A7ED1008CF122 /* DetailNoteViewController.m */,
+				0D876EEA1B1E9A91008CF122 /* Note.h */,
+				0D876EEB1B1E9A91008CF122 /* Note.m */,
+				0D876ED71B1A7806008CF122 /* NotesTableViewCell.h */,
+				0D876ED81B1A7806008CF122 /* NotesTableViewCell.m */,
+				0D876ED41B1A77BE008CF122 /* NotesTableViewController.h */,
+				0D876ED51B1A77BE008CF122 /* NotesTableViewController.m */,
 				0D876EB81B1A76D2008CF122 /* Main.storyboard */,
 				0D876EBB1B1A76D2008CF122 /* Images.xcassets */,
 				0D876EBD1B1A76D2008CF122 /* LaunchScreen.xib */,
@@ -120,6 +142,17 @@
 				0D876EC91B1A76D2008CF122 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0D876EE01B1A7857008CF122 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0D876EDD1B1A7852008CF122 /* DataSource.h */,
+				0D876EDE1B1A7852008CF122 /* DataSource.m */,
+				0D876EE41B1AB784008CF122 /* CoreDataStack.h */,
+				0D876EE51B1AB784008CF122 /* CoreDataStack.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,10 +255,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D876EEC1B1E9A91008CF122 /* Note.m in Sources */,
 				0D876EB11B1A76D2008CF122 /* AppDelegate.m in Sources */,
+				0D876ED61B1A77BE008CF122 /* NotesTableViewController.m in Sources */,
+				0D876ED91B1A7806008CF122 /* NotesTableViewCell.m in Sources */,
+				0D876EDF1B1A7852008CF122 /* DataSource.m in Sources */,
+				0D876EE31B1A7ED1008CF122 /* DetailNoteViewController.m in Sources */,
 				0D876EB41B1A76D2008CF122 /* BlocNotes.xcdatamodeld in Sources */,
-				0D876EB71B1A76D2008CF122 /* ViewController.m in Sources */,
 				0D876EAE1B1A76D2008CF122 /* main.m in Sources */,
+				0D876EE61B1AB784008CF122 /* CoreDataStack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
