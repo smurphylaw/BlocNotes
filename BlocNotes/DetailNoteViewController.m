@@ -35,6 +35,12 @@
     // [self.noteBody becomeFirstResponder];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.navigationController setToolbarHidden:NO];
+}
+
 -(void)setEntry:(Note *)entry {
     if (_entry != entry) {
         _entry = entry;
@@ -47,9 +53,14 @@
 #pragma mark - Helper methods
 
 -(void)saveNoteEntry {
-    CoreDataStack *coreDataStack = [CoreDataStack defaultStack];
-    Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:coreDataStack.managedObjectContext];
-    note.title = self.titleTextField.text;
+    Note *note = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:[DataSource sharedInstance].managedContext];
+    
+    if (self.titleTextField.text != nil) {
+        note.title = self.titleTextField.text;
+    } else {
+        note.title = self.noteBody.text;
+    }
+    
     note.body = self.noteBody.text;
     
     [[CoreDataStack defaultStack] saveContext];
@@ -83,6 +94,22 @@
 
 -(void)dismissSelf {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+#pragma mark - IBActions
+
+- (IBAction)share:(id)sender {
+    NSMutableArray *itemsToShare = [NSMutableArray array];
+    
+    if (self.noteBody.text.length > 0 || self.titleTextField.text.length > 0) {
+        [itemsToShare addObject:self.noteBody.text];
+        [itemsToShare addObject:self.titleTextField.text];
+    }
+    
+    if (itemsToShare.count > 0) {
+        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:itemsToShare applicationActivities:nil];
+        [self presentViewController:activityVC animated:YES completion:nil];
+    }
 }
 
 @end

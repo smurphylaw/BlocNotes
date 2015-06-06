@@ -18,4 +18,6 @@
 
 @property (nonatomic, strong) Note *entry;
 
+- (IBAction)share:(id)sender;
+
 @end

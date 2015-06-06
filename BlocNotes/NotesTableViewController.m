@@ -51,22 +51,24 @@
 }
 
 
-
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObjectContext *context = [DataSource sharedInstance].managedContext;
-        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-        
-        NSError *error = nil;
-        if (![context save:&error]) {
-            NSLog(@"Could not delete: %@ %@", error, [error localizedDescription]);
-        }
-        
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        //[tableView reloadData];
-    }
-    
-}
+// This method not calling? Works in DataSource.m
+//-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        NSManagedObjectContext *context = [DataSource sharedInstance].managedContext;
+//        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+//        
+//        NSError *error = nil;
+//        if (![context save:&error]) {
+//            NSLog(@"Could not delete: %@ %@", error, [error localizedDescription]);
+//        }
+//        
+//        NSMutableArray *entriesToDelete = [[NSMutableArray alloc] initWithArray:[DataSource sharedInstance].entries];
+//        [entriesToDelete removeObjectAtIndex:indexPath.row];
+//        [DataSource sharedInstance].entries = entriesToDelete;
+//        
+//        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//    }
+//}
 
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -97,7 +99,7 @@
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[DataSource sharedInstance].managedContext sectionNameKeyPath:nil cacheName:@"Master"];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[DataSource sharedInstance].managedContext sectionNameKeyPath:nil cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
@@ -106,7 +108,6 @@
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
     }
     
     return _fetchedResultsController;
