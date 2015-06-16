@@ -33,6 +33,13 @@
     self.titleTextField.placeholder = @"Title";
     // self.noteBody.layer.borderWidth = 0.5;
     // [self.noteBody becomeFirstResponder];
+    
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editTextRecognizerTapped:)];
+    recognizer.numberOfTapsRequired = 1;
+    [self.noteBody addGestureRecognizer:recognizer];
+    
+    self.noteBody.editable = NO;
+    self.noteBody.dataDetectorTypes = UIDataDetectorTypeAll;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -48,6 +55,14 @@
         self.titleTextField.text = _entry.title;
         self.noteBody.text = _entry.body;
     }
+}
+
+#pragma mark - Tap Gesture Recognizer
+
+-(void)editTextRecognizerTapped:(UIGestureRecognizer *) aRecognizer {
+    self.noteBody.dataDetectorTypes = UIDataDetectorTypeNone;
+    self.noteBody.editable = YES;
+    [self.noteBody becomeFirstResponder];
 }
 
 #pragma mark - Helper methods

@@ -64,28 +64,6 @@ NSString *const kNotesCellIdentifer = @"notes";
 //    [[DataSource sharedInstance] removeObserver:self forKeyPath:@"entry"];
 //}
 
-#pragma mark - Segue
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        if (self.searchController.active) {
-            NSArray *filteredArray = [DataSource sharedInstance].filteredEntries;
-            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-            Note *note = (Note *)filteredArray[indexPath.row];
-            [[segue destinationViewController] setEntry: note];
-
-        }
-        else {
-            NSMutableArray *entriesArray =[[DataSource sharedInstance].entries mutableCopy];
-            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-            Note *note = (Note *)entriesArray[indexPath.row];
-            [[segue destinationViewController] setEntry: note];
-
-        }
-
-    }
-}
-
 #pragma mark - Table View
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -239,7 +217,6 @@ NSString *const kNotesCellIdentifer = @"notes";
     if ([DataSource sharedInstance].managedContext) {
     
         NSString *searchText = searchController.searchBar.text;
-        
         NSString *strippedString = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         
         NSArray *searchItems = nil;
@@ -247,12 +224,14 @@ NSString *const kNotesCellIdentifer = @"notes";
             searchItems = [strippedString componentsSeparatedByString:@" "];
         }
         
-        NSString *predicateFormat = @"%K CONTAINS[cd] %@";
-        NSString *searchAttribute = @"title";
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:predicateFormat, searchAttribute, strippedString];
-        
+        NSString *predicateFormat = @"(%K CONTAINS[cd] %@) OR (%K CONTAINS[cd] %@)";
+        NSString *searchAttributeTitle = @"title";
+        NSString *searchAttributeBody = @"body";
+
+        NSPredicate *predicateTitle = [NSPredicate predicateWithFormat:predicateFormat, searchAttributeTitle, strippedString, searchAttributeBody, strippedString];
+            
         NSFetchRequest *fetchRequest = [DataSource sharedInstance].fetchRequest;
-        [fetchRequest setPredicate: predicate];
+        [fetchRequest setPredicate: predicateTitle];
         
         NSError *error;
         [DataSource sharedInstance].filteredEntries = [[DataSource sharedInstance].managedContext executeFetchRequest:fetchRequest error:&error];

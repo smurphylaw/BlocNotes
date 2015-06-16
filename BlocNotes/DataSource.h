@@ -21,6 +21,5 @@
 
 +(instancetype)sharedInstance;
 -(void)deleteEntry:(Note *)entry forRowAtIndexPath:(NSIndexPath *)indexPath;
-//-(void)searchForText:(NSString *)searchText;
 
 @end

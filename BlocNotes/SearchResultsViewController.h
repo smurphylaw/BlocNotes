@@ -14,6 +14,4 @@
 @property (nonatomic, strong) NSArray *filteredEntries;
 @property (nonatomic, strong) Note *entry;
 
-//@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-
 @end

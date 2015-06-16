@@ -12,17 +12,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="notes" rowHeight="60" id="Blh-ub-lqp" customClass="NotesTableViewCell">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Blh-ub-lqp" id="x2S-oI-UFa">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="lwy-pm-mm3" kind="show" identifier="showDetail" id="Bip-sU-i8h"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="fiB-9w-HVa" id="NsJ-is-h52"/>
                             <outlet property="delegate" destination="fiB-9w-HVa" id="I49-2g-33B"/>
@@ -76,6 +65,7 @@
                     </toolbarItems>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="noteBody" destination="gAU-0V-Hxp" id="X1j-SZ-vYU"/>
                         <outlet property="noteImage" destination="Adi-fO-vE7" id="iNf-Yq-0Fl"/>
@@ -84,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ez-cq-hKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="821.5" y="345.5"/>
+            <point key="canvasLocation" x="771.5" y="347.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ywx-qa-QXt">

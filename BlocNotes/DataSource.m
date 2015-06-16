@@ -41,7 +41,6 @@
     
     NSError *error;
     self.entries = [self.managedContext executeFetchRequest:self.fetchRequest error:&error];
-    //self.filteredEntries = [self.managedContext executeFetchRequest:self.searchFetchRequest error:&error];
     
     return self;
 }
