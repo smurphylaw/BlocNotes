@@ -17,17 +17,8 @@
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Blh-ub-lqp" id="x2S-oI-UFa">
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title of Note" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B7c-mP-w6I">
-                                            <rect key="frame" x="8" y="14" width="359" height="33"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="noteTitle" destination="B7c-mP-w6I" id="yIB-TG-bQe"/>
                                     <segue destination="lwy-pm-mm3" kind="show" identifier="showDetail" id="Bip-sU-i8h"/>
                                 </connections>
                             </tableViewCell>
@@ -39,6 +30,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="BlocNotes" id="tQl-JZ-Z68"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tableView" destination="tTI-g2-iXv" id="QES-v2-2g2"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJz-l9-kmf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -47,7 +41,7 @@
         <!--Detail Note View Controller-->
         <scene sceneID="B9o-hv-CeS">
             <objects>
-                <viewController storyboardIdentifier="showDetail" id="lwy-pm-mm3" customClass="DetailNoteViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="showDetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lwy-pm-mm3" customClass="DetailNoteViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RYP-wg-3Bb"/>
                         <viewControllerLayoutGuide type="bottom" id="6Ef-UN-XNu"/>

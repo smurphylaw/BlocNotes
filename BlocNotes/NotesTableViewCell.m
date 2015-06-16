@@ -10,4 +10,6 @@
 
 @implementation NotesTableViewCell
 
+@synthesize noteTitle;
+
 @end

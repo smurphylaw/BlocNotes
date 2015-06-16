@@ -11,9 +11,12 @@
 #import "CoreDataStack.h"
 #import "Note.h"
 
+extern NSString *const kNotesCellIdentifer;
+
 @interface NotesTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

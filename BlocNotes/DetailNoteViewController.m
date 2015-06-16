@@ -74,8 +74,6 @@
     self.entry.title = self.titleTextField.text;
     
     [[CoreDataStack defaultStack] saveContext];
-    
-    [DataSource sharedInstance].entries = [[DataSource sharedInstance].entries arrayByAddingObject:self.entry];
 }
 
 -(void)doneWasPressed {

@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "CoreDataStack.h"
 #import "DataSource.h"
+#import "NotesTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,6 +21,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    // self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[NotesTableViewController alloc] init]];
         
     CoreDataStack *coreDataStack = [CoreDataStack defaultStack];
     [DataSource sharedInstance].managedContext = coreDataStack.managedObjectContext;
