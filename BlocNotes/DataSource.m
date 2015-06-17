@@ -87,5 +87,77 @@
     
 }
 
+#pragma mark - Notification Observers
+- (void)registerForiCloudNotifications {
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    NSPersistentStoreCoordinator *psc = [CoreDataStack defaultStack].persistentStoreCoordinator;
+    
+    [notificationCenter addObserver:self
+                           selector:@selector(storesWillChange:)
+                               name:NSPersistentStoreCoordinatorStoresWillChangeNotification
+                             object:psc];
+    
+    [notificationCenter addObserver:self
+                           selector:@selector(storesDidChange:)
+                               name:NSPersistentStoreCoordinatorStoresDidChangeNotification
+                             object:psc];
+    
+    [notificationCenter addObserver:self
+                           selector:@selector(persistentStoreDidImportUbiquitousContentChanges:)
+                               name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
+                             object:psc];
+}
+
+# pragma mark - iCloud Support
+
+- (void) persistentStoreDidImportUbiquitousContentChanges:(NSNotification *)changeNotification {
+    NSLog(@"[%@ %@] Store Did Import Ubiquitous Content Changes", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    
+    NSManagedObjectContext *context = self.managedContext;
+    
+    [context performBlock:^{
+        [context mergeChangesFromContextDidSaveNotification:changeNotification];
+    }];
+}
+
+- (void)storesWillChange:(NSNotification *)notification {
+    NSLog(@"[%@ %@] Store Will Change", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    
+    [self.managedContext performBlock:^{
+        if ([self.managedContext hasChanges]) {
+            NSError *saveError;
+            if (![self.managedContext save:&saveError]) {
+                NSLog(@"Save error: %@", saveError);
+            }
+        } else {
+            [self.managedContext reset];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ManagedObjectContextReset" object:nil];
+        }
+    }];
+    
+//    NSPersistentStoreUbiquitousTransitionType transitionType = [notification.userInfo[NSPersistentStoreUbiquitousTransitionTypeKey] integerValue];
+//    NSLog(@"[%@ %@] Transition Type :%lu", NSStringFromClass([self class]), NSStringFromSelector(_cmd), transitionType);
+    
+}
+
+- (void)storesDidChange:(NSNotification *)notification {
+    NSLog(@"[%@ %@] Store Did Change", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    
+    self.managedContext = nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ManagedObjectContextRefetchRequied" object:nil];
+    
+}
+
+#pragma mark - Helper methods
+
+- (void)setupWithStoreURL:storeURL modelURL:modelURL storeOptions:storeOptions {
+    self.storeOptions = storeOptions;
+    self.storeURL     = storeURL;
+    self.modelURL     = modelURL;
+//    [self setupManagedObjectContext];
+    [self registerForiCloudNotifications];
+    self.managedContext.undoManager = [[NSUndoManager alloc] init];
+}
+
 
 @end

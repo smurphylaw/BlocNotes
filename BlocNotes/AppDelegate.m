@@ -14,6 +14,8 @@
 
 @interface AppDelegate ()
 
+@property (strong, nonatomic) DataSource *dataSource;
+
 @end
 
 @implementation AppDelegate
@@ -25,6 +27,14 @@
         
     CoreDataStack *coreDataStack = [CoreDataStack defaultStack];
     [DataSource sharedInstance].managedContext = coreDataStack.managedObjectContext;
+    
+    self.dataSource = [DataSource sharedInstance];
+    NSURL *applicationDocumentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSURL *storeURL = [applicationDocumentsDirectory URLByAppendingPathComponent:@"BlocNotes.sqlite"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"BlocNotes" withExtension:@"momd"];
+    NSDictionary *storeOptions = [self iCloudPersistentStoreOptions];
+    
+    [[DataSource sharedInstance] setupWithStoreURL:storeURL modelURL:modelURL storeOptions:storeOptions];
     
     return YES;
 }
@@ -52,6 +62,11 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [[CoreDataStack defaultStack] saveContext];
+}
+
+#pragma mark - iCloud Persistent Store
+- (NSDictionary *)iCloudPersistentStoreOptions {
+    return @{NSPersistentStoreUbiquitousContentNameKey: @"BlocNotesCloudStore"};
 }
 
 @end

@@ -16,6 +16,9 @@
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic) id <NSURLSessionDelegate> delegate;
 
+@property (strong, nonatomic) DataSource *dataSource;
+
+
 @end
 
 @implementation ShareViewController
@@ -82,6 +85,23 @@
 - (NSArray *)configurationItems {
     // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.    
     return @[];
+}
+
+#pragma mark - iCloud Persistent Store
+- (NSDictionary *)iCloudPersistentStoreOptions {
+    return @{NSPersistentStoreUbiquitousContentNameKey: @"BlocNotesCloudStore"};
+}
+
+#pragma mark - Helper methods
+
+- (void)setupNotesDataSource {
+    self.dataSource = [DataSource sharedInstance];
+    NSURL *applicationDocumentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSURL *storeURL = [applicationDocumentsDirectory URLByAppendingPathComponent:@"BlocNotes.sqlite"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"BlocNotes" withExtension:@"momd"];
+    NSDictionary *storeOptions = [self iCloudPersistentStoreOptions];
+    [self.dataSource setupWithStoreURL:storeURL modelURL:modelURL storeOptions:storeOptions];
+    
 }
 
 @end

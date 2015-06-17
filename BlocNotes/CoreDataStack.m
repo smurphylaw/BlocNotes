@@ -54,9 +54,11 @@
     NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.Murphy.BlocNotes"];
     NSURL *storeURL = [containerURL URLByAppendingPathComponent:@"BlocNotes.sqlite"];
     
+    NSDictionary *storeOptions = [self iCloudPersistentStoreOptions];
+    
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:storeOptions error:&error]) {
         // Report any error we got.
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
@@ -99,6 +101,13 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         }
     }
+}
+
+#pragma mark - iCloud Persistent Store
+- (NSDictionary *)iCloudPersistentStoreOptions {
+        return @{NSPersistentStoreUbiquitousContentNameKey: @"BlocNotesCloudStore",
+//             NSPersistentStoreUbiquitousContentURLKey:[self cloudDirectory],
+            };
 }
 
 @end

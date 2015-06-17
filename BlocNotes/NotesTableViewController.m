@@ -19,6 +19,9 @@ NSString *const kNotesCellIdentifer = @"notes";
 @property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) SearchResultsViewController *resultsTableController;
 
+@property (nonatomic, strong) NSArray *entries;
+@property (nonatomic, strong) NSArray *filteredEntries;
+
 @end
 
 @implementation NotesTableViewController
@@ -30,6 +33,8 @@ NSString *const kNotesCellIdentifer = @"notes";
     //self.tableView.dataSource = [DataSource sharedInstance];
     _resultsTableController = [[SearchResultsViewController alloc] init];
     _searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableController];
+    _entries = [DataSource sharedInstance].entries;
+    _filteredEntries = [DataSource sharedInstance].filteredEntries;
     
     // Navigation Item
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newNote)];
@@ -59,10 +64,10 @@ NSString *const kNotesCellIdentifer = @"notes";
     [self.tableView reloadData];
 }
 
-// ** ISSUE - Need fix **
-//-(void)dealloc {
-//    [[DataSource sharedInstance] removeObserver:self forKeyPath:@"entry"];
-//}
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[DataSource sharedInstance] removeObserver:self forKeyPath:@"entries"];
+}
 
 #pragma mark - Table View
 
@@ -80,7 +85,7 @@ NSString *const kNotesCellIdentifer = @"notes";
     
     NotesTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kNotesCellIdentifer forIndexPath:indexPath];
     
-    if ([[DataSource sharedInstance].entries count] > 0) {
+    if ([self.entries count] > 0) {
         [DataSource sharedInstance].entry = [DataSource sharedInstance].entries[indexPath.row];
         cell.noteTitle.text = [[DataSource sharedInstance].entry valueForKey:@"title"];
     }
@@ -120,7 +125,7 @@ NSString *const kNotesCellIdentifer = @"notes";
         [self.navigationController pushViewController:detailViewController animated:YES];
         
     } else {
-        Note *selectedEntry = [DataSource sharedInstance].filteredEntries[indexPath.row];
+        Note *selectedEntry = self.filteredEntries[indexPath.row];
         
         DetailNoteViewController *detailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"showDetail"];
         detailViewController.entry = selectedEntry;

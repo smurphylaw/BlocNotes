@@ -19,7 +19,13 @@
 @property (nonatomic, strong) NSManagedObjectContext *managedContext;
 @property (nonatomic, strong) NSFetchRequest *fetchRequest;
 
+@property (nonatomic, strong) NSURL* modelURL;
+@property (nonatomic, strong) NSURL* storeURL;
+@property (nonatomic, strong) NSDictionary *storeOptions;
+
 +(instancetype)sharedInstance;
 -(void)deleteEntry:(Note *)entry forRowAtIndexPath:(NSIndexPath *)indexPath;
+- (void)setupWithStoreURL:storeURL modelURL:modelURL storeOptions:storeOptions;
+
 
 @end
