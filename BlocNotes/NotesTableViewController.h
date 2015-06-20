@@ -17,6 +17,4 @@ extern NSString *const kNotesCellIdentifer;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
-//@property (strong, nonatomic) IBOutlet UITableView *tableView;
-
 @end

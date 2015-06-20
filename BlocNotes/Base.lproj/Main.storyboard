@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14E26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eoz-Zq-XTw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eoz-Zq-XTw">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--BlocNotes-->
@@ -9,7 +10,7 @@
             <objects>
                 <tableViewController id="fiB-9w-HVa" customClass="NotesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="tTI-g2-iXv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -18,14 +19,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="BlocNotes" id="tQl-JZ-Z68"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="tTI-g2-iXv" id="QES-v2-2g2"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJz-l9-kmf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="339.5" y="345.5"/>
+            <point key="canvasLocation" x="475" y="348"/>
         </scene>
         <!--Detail Note View Controller-->
         <scene sceneID="B9o-hv-CeS">
@@ -36,25 +36,42 @@
                         <viewControllerLayoutGuide type="bottom" id="6Ef-UN-XNu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KRf-Lq-N7C">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VrE-X6-m1K">
-                                <rect key="frame" x="16" y="84" width="343" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VrE-X6-m1K">
+                                <rect key="frame" x="16" y="103" width="568" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gAU-0V-Hxp">
-                                <rect key="frame" x="16" y="136" width="343" height="197"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Adi-fO-vE7">
+                                <rect key="frame" x="16" y="352" width="568" height="220"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="220" id="Fgj-iS-6sa"/>
+                                </constraints>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAU-0V-Hxp">
+                                <rect key="frame" x="16" y="147" width="568" height="197"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="197" id="Mph-PE-5fj"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Adi-fO-vE7">
-                                <rect key="frame" x="16" y="365" width="343" height="207"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VrE-X6-m1K" firstAttribute="leading" secondItem="KRf-Lq-N7C" secondAttribute="leadingMargin" id="A6J-jM-RYU"/>
+                            <constraint firstItem="VrE-X6-m1K" firstAttribute="top" secondItem="RYP-wg-3Bb" secondAttribute="bottom" constant="39" id="SE7-gd-X6K"/>
+                            <constraint firstItem="VrE-X6-m1K" firstAttribute="trailing" secondItem="KRf-Lq-N7C" secondAttribute="trailingMargin" id="Xh8-Iv-jvb"/>
+                            <constraint firstItem="gAU-0V-Hxp" firstAttribute="leading" secondItem="KRf-Lq-N7C" secondAttribute="leadingMargin" id="ZQC-PH-3HK"/>
+                            <constraint firstItem="gAU-0V-Hxp" firstAttribute="top" secondItem="VrE-X6-m1K" secondAttribute="bottom" constant="14" id="ihT-Y4-BgH"/>
+                            <constraint firstItem="Adi-fO-vE7" firstAttribute="top" secondItem="gAU-0V-Hxp" secondAttribute="bottom" constant="8" id="kwk-X4-iH0"/>
+                            <constraint firstItem="gAU-0V-Hxp" firstAttribute="trailing" secondItem="KRf-Lq-N7C" secondAttribute="trailingMargin" id="lsn-kQ-RNB"/>
+                            <constraint firstItem="Adi-fO-vE7" firstAttribute="leading" secondItem="KRf-Lq-N7C" secondAttribute="leadingMargin" id="pnN-lo-O69"/>
+                            <constraint firstItem="Adi-fO-vE7" firstAttribute="trailing" secondItem="KRf-Lq-N7C" secondAttribute="trailingMargin" id="rjw-39-v2r"/>
+                        </constraints>
                     </view>
                     <toolbarItems>
                         <barButtonItem systemItem="action" id="4BZ-bD-lir">
@@ -65,7 +82,6 @@
                     </toolbarItems>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="noteBody" destination="gAU-0V-Hxp" id="X1j-SZ-vYU"/>
                         <outlet property="noteImage" destination="Adi-fO-vE7" id="iNf-Yq-0Fl"/>
@@ -74,13 +90,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ez-cq-hKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="771.5" y="347.5"/>
+            <point key="canvasLocation" x="1135" y="348"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ywx-qa-QXt">
             <objects>
                 <navigationController id="eoz-Zq-XTw" sceneMemberID="viewController">
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7ZV-E8-Qvr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

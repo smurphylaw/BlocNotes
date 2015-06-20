@@ -43,20 +43,20 @@
 - (void)didSelectPost {
     // This is called after the user selects Post. Do the upload of contentText and/or NSExtensionContext attachments.
     
-//    for (NSExtensionItem *item in self.extensionContext.inputItems) {
-//        for (NSItemProvider *itemProvider in item.attachments) {
-//            if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeImage]) {
-//                [itemProvider loadItemForTypeIdentifier:(NSString *)kUTTypeImage options:nil completionHandler:^(UIImage *image, NSError *error) {
-//                    if (image) {
-//                        dispatch_async(dispatch_get_main_queue(), ^{
-//                            self.image = image;
-//                        });
-//                    }
-//                }];
-//                break;
-//            }
-//        }
-//    }
+    for (NSExtensionItem *item in self.extensionContext.inputItems) {
+        for (NSItemProvider *itemProvider in item.attachments) {
+            if ([itemProvider hasItemConformingToTypeIdentifier:(NSString *)kUTTypeImage]) {
+                [itemProvider loadItemForTypeIdentifier:(NSString *)kUTTypeImage options:nil completionHandler:^(UIImage *image, NSError *error) {
+                    if (image) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            self.image = image;
+                        });
+                    }
+                }];
+                break;
+            }
+        }
+    }
     
     NSExtensionItem *inputItem = self.extensionContext.inputItems.firstObject;
     NSExtensionItem *outputItem = [inputItem copy];

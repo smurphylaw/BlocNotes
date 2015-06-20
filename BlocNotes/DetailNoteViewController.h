@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *noteBody;
 @property (weak, nonatomic) IBOutlet UIImageView *noteImage;
 
+@property(weak, nonatomic) UIImage *pickedImage;
+
 @property (nonatomic, strong) Note *entry;
 
 - (IBAction)share:(id)sender;

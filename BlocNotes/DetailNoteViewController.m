@@ -12,6 +12,10 @@
 #import "DataSource.h"
 #import "NotesTableViewController.h"
 
+@interface DetailNoteViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@end
+
 @implementation DetailNoteViewController
 
 -(void)viewDidLoad {
@@ -22,8 +26,18 @@
     if (self.entry != nil) {
         self.noteBody.text = self.entry.body;
         self.titleTextField.text = self.entry.title;
+        [self.noteImage setImage:[UIImage imageWithData:self.entry.image]];
     }
     
+    // Bottom Toolbar
+    [self.navigationController.toolbar setBarStyle:UIBarStyleDefault];
+    UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraButtonPressed:)];
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareButtonPressed:)];
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [self setToolbarItems:@[shareButton, flexibleSpace, cameraButton]];
+    
+    // Navigation Bar
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneWasPressed)];
     self.navigationItem.rightBarButtonItem = doneButton;
     
@@ -57,12 +71,54 @@
     }
 }
 
+-(void)setPickedImage:(UIImage *)pickedImage {
+    if (_pickedImage != pickedImage) {
+        _pickedImage = pickedImage;
+        
+        [self.noteImage setImage:pickedImage];
+    }
+}
+
 #pragma mark - Tap Gesture Recognizer
 
 -(void)editTextRecognizerTapped:(UIGestureRecognizer *) aRecognizer {
     self.noteBody.dataDetectorTypes = UIDataDetectorTypeNone;
     self.noteBody.editable = YES;
     [self.noteBody becomeFirstResponder];
+}
+
+#pragma mark - Camera
+
+-(void)cameraButtonPressed:(id)sender {
+
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+        [self presentViewController:picker animated:YES completion:nil];
+        
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:@"Device has no camera"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles: nil];
+        
+        [alertView show];
+    }
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    self.pickedImage = image;
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Helper methods
@@ -77,6 +133,7 @@
     }
     
     note.body = self.noteBody.text;
+    note.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
     
     [[CoreDataStack defaultStack] saveContext];
     
@@ -87,6 +144,7 @@
 -(void)updateNoteEntry {
     self.entry.body = self.noteBody.text;
     self.entry.title = self.titleTextField.text;
+    self.entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
     
     [[CoreDataStack defaultStack] saveContext];
 }
@@ -109,9 +167,7 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-#pragma mark - IBActions
-
-- (IBAction)share:(id)sender {
+-(void)shareButtonPressed:(id)sender {
     NSMutableArray *itemsToShare = [NSMutableArray array];
     
     if (self.noteBody.text.length > 0 || self.titleTextField.text.length > 0) {

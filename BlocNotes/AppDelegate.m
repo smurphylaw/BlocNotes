@@ -36,7 +36,17 @@
     
     [[DataSource sharedInstance] setupWithStoreURL:storeURL modelURL:modelURL storeOptions:storeOptions];
     
+    [self setupAppearance];
+    
     return YES;
+}
+
+-(void)setupAppearance {
+    UINavigationBar *navigationBar = [UINavigationBar appearance];
+    navigationBar.barTintColor = [UIColor colorWithRed:77.0/255.0 green:164.0/255.0 blue:191.0/255.0 alpha:1.0f];
+    navigationBar.tintColor = [UIColor whiteColor];
+    navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
